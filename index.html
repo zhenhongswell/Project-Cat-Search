@@ -10,7 +10,37 @@
       rel="stylesheet"
     />
     <link rel="stylesheet" href="style.css" />
-    <title>Document</title>
+    <title>cat search</title>
   </head>
-  <body></body>
+  <body>
+    <div class="container">
+      <h1 class="app-title">Cat Search</h1>
+
+      <div class="select-container">
+        <div class="select-wrapper">
+          <button id="dropdown-button" class="dropdown-button">
+            please select a category
+          </button>
+          <div id="options" class="multi-select-dropdown__options">
+            <div class="multi-select-dropdown__options__option">
+              <input type="checkbox" name="" id="" />
+              <label class="multi-select-dropdown__label">select 1</label>
+            </div>
+            <div class="multi-select-dropdown__options__option">
+              <input type="checkbox" />
+              <label class="multi-select-dropdown__label">select 2</label>
+            </div>
+          </div>
+        </div>
+        <!-- sort -->
+        <div class="select-wrapper">
+          <select name="order-select" id="order-select" class="order-select">
+            <option value="ASC">old to new</option>
+            <option value="DESC">new to old</option>
+            <option value="RAND">random</option>
+          </select>
+        </div>
+      </div>
+    </div>
+  </body>
 </html>

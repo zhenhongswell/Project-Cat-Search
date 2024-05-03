@@ -103,4 +103,39 @@ comment by zhenhong
     text-wrap: nowrap;
 }
 
+.image-grid{
+    display: grid;
+    /* 切分成3等分 */
+    grid-template-columns: repeat(3,1fr);
+    column-gap: 1rem;
+    margin: 1rem 0;
+    max-width: 768px;
+}
+
+.card{
+    cursor: pointer;
+    display: flex;
+    flex-direction: column;
+    gap:0;
+    margin-bottom: 16px;
+}
+.card__img{
+    width: 100%;
+    height: auto;
+    object-fit: contain;
+    border-radius: 12px;
+    margin-bottom: 8px;
+}
+
+.load-more-button{
+    width: fit-content;
+    margin: 0 auto;
+    background-color: transparent;
+    border-radius: 4px;
+    border:1 solid #999999;
+    padding: 10px;
+    /* display: inline-flex; */
+    cursor: pointer;
+
+}
 

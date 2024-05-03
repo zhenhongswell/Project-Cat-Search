@@ -1,15 +1,106 @@
+comment by zhenhong
 * {
     padding: 0px;
     margin: 0px;
     box-sizing: border-box;
-    font-family:"Poppins" sans-serif;
-}
-
-body {
-    
+    font-family:"Poppins",sans-serif;
 }
 
 .app-title{
-    font-family:"Poppins",sans-serif;
-    
+    font-size: 32px;
 }
+
+
+.container{
+    display: flex;
+    /* flex 預設是row,修改為column*/
+    flex-direction: column;
+    /* 根據main-Axis置中,目前main y軸(column)*/
+    justify-content: center;
+    /* 作用於將上下之間的margin設為0,左右分配大小相等的邊距,達到置中的效果*/
+    margin: 0 auto;
+    max-width: 768px;
+    /* chrome瀏覽器預設1rem為16px */
+    padding: 1rem;
+}
+
+.select-container{
+    /* border: 2px solid blue; */
+    display: flex;
+    /* 定義元素與元素之間的間格為16px */
+    gap:16px;
+    /* 與上方元件的間格為32px */
+    margin-top: 32px;
+}
+
+.select-wrapper{
+    border:2px solid #999999;
+    /* 讓邊框看起來圓圓的 */
+    border-radius: 4px;
+    /* position相對的,不確定在這邊的作用？*/
+    position: relative;
+    width: fit-content;
+}
+
+.select-wrapper::after{
+    content: "";
+    background-image: url("./assets/dropdown_icon.svg");
+    /* 圖片大小：18x18 */
+    width:18px;
+    height: 18px;
+    /*位置定義置中 */
+    position: absolute;
+    right: 8px;
+    /* top50% + transform: translateY(-50%) 確保元素完全置中 */
+    top:50%;
+    transform: translateY(-50%);
+    pointer-events: none;
+}
+
+.order-select{
+    appearance: none;
+    background-color: transparent;
+    border-radius: 4px;
+    border: none;
+    width: 100%;
+    padding :10px;
+    padding-right: 30px;
+    line-height: 1;
+}
+
+.dropdown-button{
+    background-color: transparent;
+    border: none;
+    width: 100%;
+    border-radius: 4px;
+    padding :10px;
+    padding-right:30px;
+}
+
+.multi-select-dropdown__options{
+    position: absolute;
+    background-color: #fff;
+    border: 1px solid #ccc;
+    top: 100%;
+    box-shadow: 3px 3px 10px rgba(0, 0, 0, 0.2);
+    border:none;
+    border-radius: 12px;
+    padding:20px;
+}
+
+.multi-select-dropdown__options__option{
+    display: flex;
+    align-items: center;
+    gap:4px
+}
+
+.hidden{
+    display: none;
+}
+
+.multi-select-dropdown__label{
+    /* 當文字過長,不會換行 */
+    text-wrap: nowrap;
+}
+
+

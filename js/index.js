@@ -1,5 +1,11 @@
-import { fetchCats } from "./api.js";
-import { renderCats } from "./dom.js";
+import { fetchCats, fetchBreeds } from "./api.js";
+import {
+  renderCats,
+  addDropListener,
+  addCloseDropdownListener,
+  renderOptions,
+  clearImages,
+} from "./dom.js";
 
 const catList = [];
 let page = 1;
@@ -16,10 +22,39 @@ async function loadCats(limit, page, order, breedIds = []) {
   //   fetchCats.then((data) => (list = data));
   catList.push(...list);
 
-  console.log(catList);
+  //   console.log(catList);
   renderCats(list);
 }
 
+function handleBreedOptionChange(event) {
+  // TODO
+
+  const changedOption = event.target;
+  console.log("checked");
+  if (changedOption.checked) {
+    selectOptions.push(changedOption.value);
+  } else {
+    selectOptions = selectOptions.filter(
+      (item) => item !== changedOption.value
+    );
+  }
+  clearImages();
+  loadCats(limit, page, order, selectOptions);
+}
+
+async function loadBreedOptions() {
+  const breeds = await fetchBreeds();
+  //handleBreedOptionChange:當打勾選項時,要做事情
+  renderOptions(breeds, handleBreedOptionChange);
+}
+
+function addListeners() {
+  addDropListener();
+  addCloseDropdownListener();
+}
 document.addEventListener("DOMContentLoaded", async () => {
+  loadBreedOptions();
   await loadCats(limit, page, order, selectOptions);
+
+  addListeners();
 });

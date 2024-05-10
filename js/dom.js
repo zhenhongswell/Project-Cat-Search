@@ -57,3 +57,8 @@ export function clearImages() {
   ];
   columns.forEach((column) => (column.innerHTML = ""));
 }
+
+export function addSelectOrderListener(handler) {
+  const orderSelect = document.getElementById("order-select");
+  orderSelect.addEventListener("change", handler);
+}

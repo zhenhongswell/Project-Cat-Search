@@ -5,6 +5,7 @@ import {
   addCloseDropdownListener,
   renderOptions,
   clearImages,
+  addSelectOrderListener,
 } from "./dom.js";
 
 const catList = [];
@@ -51,9 +52,14 @@ async function loadBreedOptions() {
 function addListeners() {
   addDropListener();
   addCloseDropdownListener();
+  addSelectOrderListener((e) => {
+    order = e.target.value;
+    clearImages();
+    loadCats(limit, page, order, selectOptions);
+  });
 }
 document.addEventListener("DOMContentLoaded", async () => {
-  loadBreedOptions();
+  await loadBreedOptions();
   await loadCats(limit, page, order, selectOptions);
 
   addListeners();

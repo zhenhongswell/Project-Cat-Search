@@ -40,3 +40,40 @@ export function createBreedOption(breed, handleBreedOptionChange) {
   option.append(br);
   return option;
 }
+
+export function createTempItem(temperament) {
+  // <span class="drawer__personality__tags__tag">Closely</span>
+  const tempItem = document.createElement("span");
+  tempItem.classList.add("drawer__personality__tags__tag");
+  tempItem.textContent = temperament;
+  return tempItem;
+}
+
+export function createStatsItem(displayName, score) {
+  // <div class="drawer__stats__item">
+  //         <p class="drawer__stats__item__title" id="intelligence">
+  //           intelligence
+  //         </p>
+  //         <div class="drawer__stats__item__bar">
+  //           <div class="drawer__stats__item__bar__fill"></div>
+  //         </div>
+  //       </div>
+  const statsItem = document.createElement("div");
+  statsItem.classList.add("drawer__stats__item");
+  const statsItemTitle = document.createElement("p");
+  statsItemTitle.classList.add("drawer__stats__item__title");
+  statsItemTitle.id = displayName;
+  statsItemTitle.textContent = `${displayName} :`;
+  const statsItemBar = document.createElement("div");
+  statsItemBar.classList.add("drawer__stats__item__bar");
+  const statsItemBarFill = document.createElement("div");
+  statsItemBarFill.classList.add("drawer__stats__item__bar__fill");
+  // width 查看css
+  statsItemBarFill.style.width = `${score * 20}%`;
+  statsItemBar.appendChild(statsItemBarFill);
+
+  statsItem.appendChild(statsItemTitle);
+  statsItem.appendChild(statsItemBar);
+
+  return statsItem;
+}

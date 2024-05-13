@@ -1,4 +1,9 @@
-import { createCard, createBreedOption } from "./createElement.js";
+import {
+  createCard,
+  createBreedOption,
+  createTempItem,
+  createStatsItem,
+} from "./createElement.js";
 export function renderCats(catList) {
   const imageGrid = document.querySelector(".image-grid");
   const columns = [
@@ -11,7 +16,111 @@ export function renderCats(catList) {
     const item = catList[i];
     // console.log(item);
     const card = createCard(item);
+    card.addEventListener("click", (e) => {
+      setDrawerContent(item);
+      openDrawer();
+    });
+
     columns[col].appendChild(card);
+  }
+}
+
+export function openDrawer() {
+  const drawer = document.getElementById("drawer");
+  drawer.classList.add("open");
+}
+
+export function addDrawerCloseListener() {
+  document.addEventListener("click", (e) => {
+    const drawer = document.getElementById("drawer");
+    const isClickedInsideCard = e.target.closest(".card");
+    console.log(isClickedInsideCard);
+    const isClickedInsideDrawer = drawer.contains(e.target);
+
+    if (!isClickedInsideCard && !isClickedInsideDrawer) {
+      drawer.classList.remove("open");
+    }
+  });
+}
+
+export function setDrawerContent(item) {
+  const drawer = document.getElementById("drawer");
+  const drawerImg = document.getElementById("drawer-image");
+
+  drawerImg.src = item.url;
+  console.log(item);
+  const breedName = document.getElementById("drawer-breed-name");
+  breedName.textContent = item.breeds[0].name;
+
+  const origin = document.getElementById("drawer__origin-text");
+  origin.textContent = item.breeds[0].origin;
+
+  const lifeSpan = document.getElementById("drawer-lifespan");
+  lifeSpan.textContent = item.breeds[0].life_span;
+
+  const weight = document.getElementById("drawer-weight");
+  weight.textContent = item.breeds[0].weight.metric;
+
+  const temperament = document.getElementById("temperament");
+  temperament.innerHTML = "";
+  const temperamentList = item.breeds[0].temperament.split(", ");
+  for (const temp of temperamentList) {
+    const tempItem = createTempItem(temp);
+    temperament.appendChild(tempItem);
+  }
+
+  const stats = document.getElementById("drawer-stats");
+  stats.innerHTML = "";
+  const scoreListings = [
+    {
+      key: "intelligence",
+      displayName: "智力",
+    },
+    {
+      key: "affection_level",
+      displayName: "親密度",
+    },
+    {
+      key: "energy_level",
+      displayName: "活力",
+    },
+    {
+      key: "child_friendly",
+      displayName: "兒童友善",
+    },
+    {
+      key: "dog_friendly",
+      displayName: "親近狗狗",
+    },
+    {
+      key: "indoor",
+      displayName: "喜歡在家",
+    },
+    {
+      key: "health_issues",
+      displayName: "遺傳疾病",
+    },
+    {
+      key: "shedding_level",
+      displayName: "掉毛量",
+    },
+    {
+      key: "social_needs",
+      displayName: "社交需求",
+    },
+    {
+      key: "stranger_friendly",
+      displayName: "陌生人友善",
+    },
+    {
+      key: "rare",
+      displayName: "稀有度",
+    },
+  ];
+
+  for (const { key, displayName } of scoreListings) {
+    const StatsItem = createStatsItem(displayName, item.breeds[0][key]);
+    stats.appendChild(StatsItem);
   }
 }
 

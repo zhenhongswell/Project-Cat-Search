@@ -9,6 +9,7 @@ import {
   addLoadMoreButtonListener,
   enableLoadMoreButton,
   disableLoadMoreButton,
+  addDrawerCloseListener,
 } from "./dom.js";
 
 const catList = [];
@@ -68,6 +69,7 @@ async function loadBreedOptions() {
 function addListeners() {
   addDropListener();
   addCloseDropdownListener();
+  addDrawerCloseListener();
   addSelectOrderListener(async (e) => {
     order = e.target.value;
 
